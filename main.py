@@ -143,7 +143,6 @@ if selected == "Input":
 
                 recipient_address = df.iat[0, 1]
 
-                acc="GBHQDGIHI3RW2QQ7E6VA4MLUDNGDHW6A4ZRUB6AHPHBVRZG7QB6B6AJK"
                 URLM = "https://minepi.com/blockexplorer/account/"+recipient_address+"#payments"
                 XPATH = "/html/body/div/div/div[3]/div/div[2]/div/div/div[2]/div/div/table/tbody/tr[1]/td[3]/span/a"
                 TIMEOUT = 20
@@ -207,7 +206,7 @@ if selected == "Input":
                     text_x = int(text_x)
                     text_y = int(text_y)
 
-                    cv.putText(img, certi_name, (360, 800), fontFace, font_size, font_color, 2)
+                    cv.putText(img, certi_name, (360, 860), fontFace, font_size, font_color, 2)
                     cv.putText(img, 'Hash: '+proof, (92, 1360), font, 1.7, font_color, 2)
 
                     certi_path = output_path + certi_name + '.png'
