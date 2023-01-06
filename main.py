@@ -27,19 +27,8 @@ import json
 import time
 authentication_status = True
 
-from tronpy import Tron
-from tronpy.keys import PrivateKey
 
-# integers representing half & one Tron
-HALF_TRON = 500000
-ONE_TRON = 1000000
 
-# your wallet information
-WALLET_ADDRESS = "TP59LgebV1VtQMswGiju9PEYZ4dT3ziNHa"
-PRIVATE_KEY = "fb001bcc4f82c6260b21f00faa400b34630ea796e72c9c4f2fc99216a6e8085a"
-
-# connect to the Tron blockchain
-client = Tron(network='nile')
 
 with st.sidebar.form(key='my_form'):
 	nm = st.text_input('Enter Name:')
@@ -50,7 +39,7 @@ with st.sidebar.form(key='new'):
 	button = ct.form_submit_button(label='Save 2')
 	
 with st.sidebar.expander('Example Input'):
-	st.code('Name : Phil\n'+'Contract : THh2BTPHFT22vEVFqcbu1PEMbP5GsqNpqG')
+	st.code('Name : Phil\n'+'Wallet : GBHQDGIHI3RW2QQ7E6VA4MLUDNGDHW6A4ZRUB6AHPHBVRZG7QB6B6AJK')
 
 	
 	
@@ -61,26 +50,6 @@ if button:
 fontFace=cv.FONT_HERSHEY_SCRIPT_COMPLEX
 	
 	
-# send some 'amount' of Tron to the 'wallet' address
-def send_tron(amount, wallet):
-    try:
-        priv_key = PrivateKey(bytes.fromhex(PRIVATE_KEY))
-        
-        # create transaction and broadcast it
-        txn = (
-            client.trx.transfer(WALLET_ADDRESS, str(wallet), int(amount))
-            .memo("Transaction Description")
-            .build()
-            .inspect()
-            .sign(priv_key)
-            .broadcast()
-        )
-        # wait until the transaction is sent through and then return the details  
-        return txn.wait()
-
-    # return the exception
-    except Exception as ex:
-        return ex
 
 
 
@@ -204,22 +173,6 @@ if selected == "Input":
                 ls=elements.get_attribute("href")
                 result = ls.rsplit('/', 1)[-1]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                #st.dataframe(df['Contract'])
-
                 
                 sam=st.empty()
                 
@@ -231,23 +184,11 @@ if selected == "Input":
                 time.sleep(0.5)
 
                 amount = 1000000
-                ##k=send_tron(amount,recipient_address)
                 sam.success('**Transaction Extracted**')
                 sam.empty()
                 st.subheader("Pi Transaction Details")
-                #st.success('**Tron HashID: **'+str(k['id']))
-                
-                
-                # notice that this is a `set` and not a list
-                #url_test = 'https://nile.tronscan.org/#/transaction/{}'
-                #url = url_test.format(str(k['id']))
-                
-        
-                #st.markdown("Verify the Transaction on Tronscan [link](+str(k['id'])")
-                #url = "https://share.streamlit.io/mesmith027/streamlit_webapps/main/MC_pi/streamlit_app.py"
-                #st.write("check out this [link](%s)" % url)
 
-                st.success("Verify the Transaction on Tronscan [link](%s)" % ls)
+                st.success("Verify the Transaction on Pi BlockExplorer [link](%s)" % ls)
 
             # st.dataframe(df)
                 for i in names:
@@ -266,8 +207,8 @@ if selected == "Input":
                     text_x = int(text_x)
                     text_y = int(text_y)
 
-                    cv.putText(img, certi_name, (328, 800), fontFace, font_size, font_color, 2)
-                    cv.putText(img, 'Hash: '+proof, (92, 1320), font, 1.7, font_color, 2)
+                    cv.putText(img, certi_name, (360, 800), fontFace, font_size, font_color, 2)
+                    cv.putText(img, 'Hash: '+proof, (92, 1360), font, 1.7, font_color, 2)
 
                     certi_path = output_path + certi_name + '.png'
 
@@ -281,9 +222,6 @@ if selected == "Input":
 
 
 
-                    #st.markdown("Verify the Transaction on Tronscan [link](+str(k['id'])")
-                    #url = "https://share.streamlit.io/mesmith027/streamlit_webapps/main/MC_pi/streamlit_app.py"
-                    #st.write("check out this [link](%s)" % url)
 
 
                 data = block.get_chain()
@@ -384,7 +322,7 @@ if selected == "Verify":
         dba = TableDba(model=dynamic_model)
         ret = dba.get(name=name, record_date=record_date)
         record = ret.get('data')
-        st.success("Tron Verified Certificate Successfuly Generated")
+        st.success("Pi Verified Certificate Successfuly Generated")
 
         if len(record):
                 ipfs_url = ipfs.ipfs_get(record)
