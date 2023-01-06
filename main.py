@@ -181,7 +181,7 @@ if selected == "Input":
 
 
                 firefoxOptions = Options()
-		opts.add_argument("--headless")
+                firefoxOptions.add_argument("--headless")
 
                 service = Service(GeckoDriverManager().install())
                 driver = webdriver.Firefox(
